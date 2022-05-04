@@ -3,3 +3,4 @@
 */5 * * * * /var/www/html/xibo/geraImgs 1>/dev/null 2>&1
 #
 teste
+Lucas
