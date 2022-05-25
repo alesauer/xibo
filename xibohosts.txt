@@ -1,0 +1,27 @@
+PI 2S Elevador 1,172.16.61.24
+PI SE Elevador 4,172.16.61.26
+PI TE Elevador 1,172.16.61.28
+PI 1S Elevador 2,172.16.61.31
+PI 2 Elevador 3,172.16.61.37
+PI SE Elevador 3,172.16.61.29
+Plenarinho I,172.16.61.44
+PI 1 Elevador 3,172.16.61.52
+PI 1 Elevador 1,172.16.61.53
+Porta Galeria Inferior DPOL,172.16.61.54
+Plenarinho AUDITÓRIO J ALENCAR,172.16.61.50
+Plenarinho II,172.16.61.48
+Plenarinho Auditório,172.16.61.55
+PI SE Corredor - Vertical,172.16.61.15
+Salao do Cafe,172.16.61.3
+Plenarinho III,172.16.61.41
+PI TE Teatro Galeria,172.16.61.21
+PI 1 - Elevador 4,172.20.36.37
+Porta Teatro CAC - novo,172.16.61.11
+PI SE Elevador 2,172.16.61.10
+PI - PRIMEIRO ANDAR (elevador 2),172.16.61.2
+PI 2 Elevador 1 - novo,172.16.61.115
+PI 2 Elevador 2 - novo,172.16.61.113
+PI 2 Elevador 4 - Novo,172.16.61.114
+Plenarinho IV,172.16.61.25
+PI 1S Elevador 1,172.16.61.23
+PI TE Elevador 3,172.16.61.20

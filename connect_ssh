@@ -1,0 +1,8 @@
+#!/usr/bin/expect -f
+spawn ssh -oKexAlgorithms=+diffie-hellman-group1-sha101 root@172.16.61.26
+expect "password: "
+send "xibogac\r"
+expect "$ "
+touch deucerto.txt
+expect "$ "
+send "exit\r"

@@ -25,7 +25,7 @@ class HostsXibo{
 
     function get_hosts(){
         $obj_db= new Database;
-        $resultado_get = $obj_db->connect("select display,ClientAddress,MacAddress from display");
+        $resultado_get = $obj_db->connect("select display,ClientAddress,MacAddress from display WHERE display not LIKE '%Inativo%'");
         return $resultado_get;
     }
 }

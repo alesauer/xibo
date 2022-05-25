@@ -5,3 +5,4 @@ php $dir/Class_tests.php
 rm -rf $dir/imgs/*
 #for i in `mysql -u xiboleitura -D xibo -pajk3sdf7s4 -h xibo.almg.uucp -e "select ClientAddress from display;" -N -B`; do vnccapture -Pxibogac -H $i -p 6000 -o imgs/$i.png; done
 for i in ` cat $dir/hosts.cfg | grep -v "Down;Down;Down" | awk -F ';' '{print $2 }'`; do vnccapture -Pxibogac -H $i -p 6000 -o $dir/imgs/$i.png; done
+cat /var/www/html/xibo/hosts.cfg | awk -F ';' '{print $1","$2 }' > /var/www/html/xibohosts.txt

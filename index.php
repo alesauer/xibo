@@ -6,6 +6,8 @@
     <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
     <meta name='description' content=''>
     <meta name='author' content=''>
+    <meta http-equiv="refresh" content="60;url=http://e8001:8080/xibo/index.php"/>
+
     <link rel='icon' href='/docs/4.0/assets/img/favicons/favicon.ico'>
 
     <title>Xibo ALMG</title>
@@ -37,8 +39,6 @@
           </li>
          
         </ul>
-        
-
       </div>
     </nav>
 
@@ -47,7 +47,7 @@
       <div class='starter-template'>
         <h1>Xibo Hosts</h1>
         <p class='lead'>Utilize essa interface para informações das estações XIBO</p>
-	<p class='lead'>Último UPDADE:<b><?php $data_imgs = file('data.cfg'); echo $data_imgs[0]; ?></b></p>
+	<p class='lead'>Info: <b><?php $data_imgs = file('data.cfg'); echo $data_imgs[0]; ?></b></p>
       </div>
 
       <div>
@@ -61,6 +61,7 @@
       <th scope='col'>PING</th>
       <th scope='col'>VNC</th>
       <th scope='col'>SSH</th>
+      <th scope='col'>Boot</th>
       <th scope='col'>Screen</th>
     </tr>
   </thead>
@@ -70,14 +71,14 @@
 
 
 <?php
-include("classes.php");
-$obj= new HostsXibo;
-$resultado = $obj->get_hosts();
 
+
+include("classes.php");
 
 
 $arq = file("hosts.cfg");
 $tam = count($arq);
+
 
 for($i=1;$i<$tam;$i++){
 $divide = explode(';',$arq[$i]);
@@ -106,7 +107,12 @@ echo "
       <td><span class='badge $pingStatus rounded-pill'>$ping</span></td>
       <td><span class='badge $vncStatus rounded-pill'>$vnc</span></td>
       <td><span class='badge $sshStatus rounded-pill'>$ssh</span></td>
-      ";
+      
+      <td><span class='badge rounded-pill'></span>
+<button type='button' class='btn btn-light' data-toggle='modal' data-target='#exampleModal'>
+    <img src='boot.png' width='20' height='20'>
+</button>
+</span></td>";
 
       if($ping == "Up"){
       echo "<td><a href='imgs/$ClientAddress.png'><img src='imgs/$ClientAddress.png' width='100' height='100' class='img-fluid'></a></td>";
@@ -121,41 +127,49 @@ echo "
 }
 
 
-
-/*
-$i=1;
-while($linha=mysqli_fetch_array($resultado))
-{
-  $display = $linha['display'];
-  $ClientAddress = $linha['ClientAddress'];
-
-//  $check = new Tests;
-//  $vnc = $check->check_tcp_ports($ClientAddress,6000);
-
-
-echo "
-
-    <tr>
-      <th scope='row'>$i</th>
-      <td>$display</td>
-      <td>$ClientAddress</td>
-      <td><span class='badge bg-success rounded-pill'>OK</span></td>
-      <td><span class='badge bg-success rounded-pill'>OK</span></td>
-      <td><span class='badge bg-danger rounded-pill'>Fail</span></td>
-      <td><img src='img.png' width='100' height='100' class='img-fluid'></td>
-    </tr>
-   ";
-   $i++;
-}
-*/
-
-?>
-
-
+?> 
 
   </tbody>
 </table>
       </div>  
+
+
+<!-- Modal -->
+<div class='modal fade' id='exampleModal' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+  <div class='modal-dialog' role='document'>
+    <div class='modal-content'>
+      <div class='modal-header'>
+        <h5 class='modal-title' id='exampleModalLabel'>Reiniciar Dispositivo</h5>
+        <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+          <span aria-hidden='true'>&times;</span>
+        </button>
+      </div>
+      <form action='solicitaboot.php' type='post'>
+
+      <div class='modal-body'>
+          <div class='form-group'>
+                  <label for='message-text' class='col-form-label'>Senha do Device:</label>
+                  <input type='password' class='form-control' name='motivo1' id='message-text'></textarea>
+              </div>
+              
+          <div class='form-group'>
+              <label for='message-text' class='col-form-label'>Motivo:</label>
+              <textarea class='form-control' name='motivo' id='message-text'></textarea>
+          </div>
+
+        
+    </div>
+      <div class='modal-footer'>
+        <button type='button' class='btn btn-secondary' data-dismiss='modal'>Fechar</button>
+        <button type='submit' class='btn btn-primary'>Reiniciar</button>
+      </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+
 
 
     </main><!-- /.container -->

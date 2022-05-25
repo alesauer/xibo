@@ -23,8 +23,16 @@ class Tests
 	       // error_reporting(0);
         	$dir="var/www/html/xibo";
         	$check = exec("/$dir/check_tcp -H $host -p $port -t1 | grep CRITICAL | wc -l");	
-        	//$check = exec("./check_tcp -H $host -p $port -t1");	
-        	if($check==1)
+        	//$check = exec("./check_tcp -H $host -p $port -t1");
+			
+			//Caso especial Maq PI SE Corredor - Vertical que é Windows. Nao tem ssh
+			if($host=='172.16.61.15' and $port == '22')	
+				{
+					$check="Não tem";						
+				}
+        	
+			
+				if($check==1)
   			{
   				$check="Down";
   			}else{
@@ -51,12 +59,7 @@ class Generate_Xibo_Status{
 		$resultado = $obj->get_hosts();
 
 		$check = new Tests;
-/*
-		$dir="/var/www/html/xibo/imgs";
-		exec("rm -rf $dir/* 1>/dev/null 2>&1");
-		exec("chmod 777 $dir 1>/dev/null 2>&1");
-        $i=1;
-*/
+
         exec("rm -rf hosts.cfg");
 
 		while($linha=mysqli_fetch_array($resultado))
@@ -66,28 +69,16 @@ class Generate_Xibo_Status{
 			$display = $linha['display'];
 			$MacAddress = $linha['MacAddress'];
 			$vnc = trim($check->check_tcp_ports($ClientAddress,6000));
+
   			$ssh = trim($check->check_tcp_ports($ClientAddress,22));
   			$ping = trim($check->ping($ClientAddress,10));
 
   			//echo "$display;$ClientAddress;$MacAddress;$vnc;$ssh;$ping\n";
   			exec("echo '$display;$ClientAddress;$MacAddress;$vnc;$ssh;$ping' >> hosts.cfg");
-  			/*
-  			if($ping == "Up")
-  			{	
-  				echo "Gerando img do $display\n\n";
-	  			exec("vnccapture -Pxibogac -H $ClientAddress -p 6000 -o $dir/$display.png 1>/dev/null 2>&1");
-  			}
-  			else{
-  				echo "Gerando img PADRAO do $display\n\n";
-  				$img_default = "/var/www/html/img.png";
-  				exec("cp -a /var/www/html/xibo/img.png $dir/$display.png 1>/dev/null 2>&1");
-  			}
-  			$i++;
-			*/
+  		
 		}		
 	}
 }
-
 
 $generate = new Generate_Xibo_Status;
 $generate->get_status();
